@@ -1,0 +1,8 @@
+path: "B:/ETRIS ultimate AI/data/plate_detection"
+train: train/images
+val: val/images
+test: test/images
+
+nc: 1
+names:
+  0: license_plate
