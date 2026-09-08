@@ -1,0 +1,60 @@
+{
+  "intersection_id": "INDIA-DEMO-01",
+  "settings": {
+    "arrival_window_s": 30.0,
+    "stationary_motion_threshold": 0.012,
+    "queue_stationary_min_s": 1.25,
+    "controller_update_interval_s": 2.0,
+    "track_expiry_s": 2.0
+  },
+  "approaches": [
+    {
+      "approach_id": "APPROACH_A",
+    "label": "MAIN_APPROACH",
+    "traffic_polygon": [
+      [0.20, 0.44],
+      [0.49, 0.44],
+      [0.57, 1.00],
+      [0.04, 1.00]
+    ],
+    "queue_polygon": [
+      [0.20, 0.53],
+      [0.50, 0.53],
+      [0.53, 0.80],
+      [0.08, 0.80]
+    ],
+    "entry_line": [
+      [0.16, 0.70],
+      [0.52, 0.70]
+    ],
+    "entry_direction": [
+      0.10,
+      1.00
+    ]
+  },
+  {
+    "approach_id": "APPROACH_B",
+    "label": "CROSS_APPROACH",
+    "traffic_polygon": [
+      [0.49, 0.43],
+      [0.90, 0.42],
+      [0.98, 0.86],
+      [0.54, 0.80]
+    ],
+    "queue_polygon": [
+      [0.53, 0.50],
+      [0.91, 0.49],
+      [0.96, 0.76],
+      [0.55, 0.78]
+    ],
+    "entry_line": [
+      [0.61, 0.57],
+      [0.92, 0.56]
+    ],
+    "entry_direction": [
+      -0.20,
+      1.00
+    ]
+    }
+  ]
+}

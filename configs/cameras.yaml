@@ -1,0 +1,6 @@
+cameras: []
+
+defaults:
+  timestamp_source: "camera"
+  timezone: "Asia/Kolkata"
+  coordinate_system: "EPSG:4326"

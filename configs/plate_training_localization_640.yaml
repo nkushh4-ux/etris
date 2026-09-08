@@ -1,0 +1,133 @@
+# Experiment A: controlled 640px localization fine-tune.
+# Candidate selection uses only the validation split. The test split is reserved.
+
+task: detect
+mode: train
+
+# Start from the immutable historical best checkpoint, not the production copy.
+model: runs/plate_detection/yolo11n_indian_smoke/weights/best.pt
+data: data/plate_detection/data.yaml
+
+# Experiment identity and isolated output directory.
+project: runs/plate_detection
+name: yolo11n_indian_localization_640
+exist_ok: false
+
+# Controlled Experiment A changes.
+epochs: 30
+patience: 10
+imgsz: 640
+warmup_epochs: 1.0
+scale: 0.25
+mosaic: 0.0
+close_mosaic: 0
+
+# Original training/runtime settings retained.
+time: null
+batch: 4
+save: true
+save_period: -1
+cache: false
+device: "0"
+workers: 0
+pretrained: true
+cls_remap: true
+optimizer: auto
+verbose: true
+seed: 0
+deterministic: true
+single_cls: false
+rect: false
+cos_lr: false
+resume: false
+amp: true
+fraction: 1.0
+profile: false
+freeze: null
+multi_scale: 0.0
+compile: false
+channels_last: null
+dropout: 0.0
+
+# Validation and prediction settings retained; selection is on split=val.
+val: true
+split: val
+save_json: false
+conf: null
+iou: 0.7
+max_det: 300
+plots: true
+augment: false
+agnostic_nms: false
+classes: null
+
+# Original optimizer and loss settings retained.
+lr0: 0.01
+lrf: 0.01
+momentum: 0.937
+weight_decay: 0.0005
+warmup_momentum: 0.8
+warmup_bias_lr: 0.1
+box: 7.5
+cls: 0.5
+cls_pw: 0.0
+dfl: 1.5
+pose: 12.0
+kobj: 1.0
+rle: 1.0
+angle: 1.0
+dlog: 1.0
+dgrad: 0.5
+dlam: 1.0
+nbs: 64
+
+# Original augmentation settings retained except scale and mosaic above.
+hsv_h: 0.015
+hsv_s: 0.7
+hsv_v: 0.4
+degrees: 0.0
+translate: 0.1
+shear: 0.0
+perspective: 0.0
+flipud: 0.0
+fliplr: 0.5
+bgr: 0.0
+mixup: 0.0
+cutmix: 0.0
+copy_paste: 0.0
+copy_paste_mode: flip
+auto_augment: randaugment
+erasing: 0.4
+
+# Detection-task compatibility settings retained from the original run.
+overlap_mask: true
+mask_ratio: 4
+quantize: null
+dnn: false
+end2end: null
+source: null
+vid_stride: 1
+stream_buffer: false
+visualize: false
+embed: null
+show: false
+save_frames: false
+save_txt: false
+save_conf: false
+save_crop: false
+show_labels: true
+show_conf: true
+show_boxes: true
+line_width: null
+
+# Export-only defaults retained for complete argument reproducibility.
+format: torchscript
+keras: false
+optimize: false
+dynamic: false
+simplify: true
+opset: null
+workspace: null
+nms: false
+
+cfg: null

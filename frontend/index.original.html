@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ETRIS — Enhanced Traffic Recognition & Intelligence System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#pageTitle">Skip to content</a>
+  <aside class="sidebar">
+    <div class="brand">
+  <div class="brand-logo">
+    <svg viewBox="0 0 64 64" aria-hidden="true">
+      <path d="M10 20 L32 8 L54 20 L32 32 Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linejoin="round"/>
+      <path d="M10 20 V44 L32 56 V32"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linejoin="round"/>
+      <path d="M54 20 V44 L32 56"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linejoin="round"/>
+      <path d="M20 25 V40 L44 27"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="5"
+            stroke-linecap="round"
+            stroke-linejoin="round"/>
+      <circle cx="43" cy="16" r="4" fill="currentColor"/>
+    </svg>
+  </div>
+
+  <div>
+    <strong>ETRIS</strong>
+    <span>Traffic Intelligence</span>
+  </div>
+</div>
+
+<div class="nav-caption">WORKSPACE</div>
+<nav id="nav" aria-label="Main navigation">
+
+  <button class="nav-item active" data-page="overview">
+    <span class="nav-icon overview-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 10.5L12 3l9 7.5"/>
+        <path d="M5.5 9.5V21h13V9.5"/>
+        <path d="M8 17l3-3 2 2 4-5"/>
+        <path d="M15 11h2v2"/>
+      </svg>
+    </span>
+    <span>Overview</span>
+  </button>
+
+  <button class="nav-item" data-page="anpr">
+    <span class="nav-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="4" y="5" width="16" height="10" rx="2"/>
+        <circle cx="12" cy="10" r="2.5"/>
+        <path d="M7 18a3 3 0 1 0 0 1"/>
+        <path d="M17 18a3 3 0 1 0 0 1"/>
+        <path d="M3 18h2M19 18h2"/>
+      </svg>
+    </span>
+    <span>Live ANPR</span>
+  </button>
+
+  <button class="nav-item" data-page="tracking">
+    <span class="nav-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 22s7-6.2 7-12A7 7 0 0 0 5 10c0 5.8 7 12 7 12Z"/>
+        <rect x="8.5" y="7.5" width="7" height="4.5" rx="1.2"/>
+        <path d="M9 15h6"/>
+        <path d="M7 19h10"/>
+      </svg>
+    </span>
+    <span>Vehicle Tracking</span>
+  </button>
+
+  <button class="nav-item" data-page="analytics">
+    <span class="nav-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 20V13"/>
+        <path d="M9 20V9"/>
+        <path d="M14 20V11"/>
+        <path d="M19 20V5"/>
+        <path d="M3 20h18"/>
+        <path d="M4 9l5-4 4 3 7-6"/>
+      </svg>
+    </span>
+    <span>Traffic Analytics</span>
+  </button>
+
+  <button class="nav-item" data-page="alerts">
+    <span class="nav-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 3L21 20H3L12 3Z"/>
+        <path d="M12 9v5"/>
+        <circle cx="12" cy="17" r="1"/>
+      </svg>
+    </span>
+    <span>Alert Centre</span>
+  </button>
+
+</nav>
+    <div class="sidebar-status">
+      <span class="dot green"></span>
+      <div><b>System Operational</b><small>Presentation workspace</small></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+
+        <p class="eyebrow">CITY OPERATIONS / ETRIS</p>
+        <h1 id="pageTitle" tabindex="-1">Overview</h1>
+      </div>
+      <div class="top-actions">
+        <span class="system-pill"><span class="dot green"></span> System overview</span>
+        <span class="date-pill">SIH · Demo data</span>
+      </div>
+    </header>
+
+    <section id="overview" class="page active">
+      <div class="page-toolbar"><div><h2>City at a glance</h2><p>Traffic, camera health and priority events in one workspace.</p></div><span class="context-label">SIMULATED OPERATIONS</span></div>
+      <div class="stats-grid">
+        <div class="stat-card"><span>Vehicles Detected Today</span><strong>12,486</strong><small class="positive">↑ 8.4% vs yesterday</small></div>
+        <div class="stat-card"><span>Active Cameras</span><strong>18 <em>/ 20</em></strong><small>2 cameras require attention</small></div>
+        <div class="stat-card"><span>Active Alerts</span><strong class="warning-text">7</strong><small class="warning-text">3 critical · 4 warnings</small></div>
+        <div class="stat-card"><span>Vehicles Being Tracked</span><strong>34</strong><small>Across 11 active cameras</small></div>
+      </div>
+
+      <div class="content-grid overview-grid">
+        <div class="panel map-panel">
+          <div class="panel-head"><div><h2>City Traffic Network</h2><p>Live camera coverage · mock visualization</p></div><span class="legend"><i class="normal"></i> Normal <i class="moderate"></i> Moderate <i class="congested"></i> Congested</span></div>
+          <div class="city-map">
+            <div class="road r1"></div><div class="road r2"></div><div class="road r3"></div><div class="road r4"></div>
+            <span class="map-label l1">Sector 18</span><span class="map-label l2">City Centre</span><span class="map-label l3">Main Junction</span>
+            <button class="camera-marker normal m1">C01</button><button class="camera-marker moderate m2">C04</button><button class="camera-marker congested m3">C09</button><button class="camera-marker normal m4">C12</button><button class="camera-marker moderate m5">C15</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div><h2>Recent Alerts</h2><p>Latest system events</p></div><button class="text-btn" onclick="showPage('alerts')">View all</button></div>
+          <div class="alert-list">
+            <div class="mini-alert critical"><span class="alert-icon">!</span><div><b>Blacklisted vehicle detected</b><small>CAM-04 · 10:42 AM</small></div></div>
+            <div class="mini-alert warning"><span class="alert-icon">P</span><div><b>Restricted parking violation</b><small>CAM-09 · 10:35 AM</small></div></div>
+            <div class="mini-alert critical"><span class="alert-icon">!</span><div><b>Accident detected</b><small>CAM-12 · 10:39 AM</small></div></div>
+          </div>
+          <div class="subsection-title">Recent Activity</div>
+          <div class="activity">
+            <p><time>10:46</time> Vehicle tracked at CAM-11</p>
+            <p><time>10:42</time> Blacklisted vehicle detected</p>
+            <p><time>10:39</time> Accident alert generated</p>
+            <p><time>10:35</time> Restricted parking alert</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel camera-status">
+        <div class="panel-head"><div><h2>Camera Status</h2><p>Selected gateway cameras</p></div></div>
+        <div class="camera-status-grid">
+          <div><span class="dot green"></span><b>CAM-01</b><small>Online</small></div>
+          <div><span class="dot green"></span><b>CAM-02</b><small>Online</small></div>
+          <div><span class="dot red"></span><b>CAM-03</b><small>Offline</small></div>
+          <div><span class="dot green"></span><b>CAM-04</b><small>Online</small></div>
+        </div>
+      </div>
+    </section>
+<section id="anpr" class="page">
+
+  <!-- ANPR HEADER -->
+  <div class="page-toolbar anpr-toolbar">
+    <div>
+      <h2>ANPR Monitor</h2>
+      <p>Automatic Number Plate Recognition · Simulated camera feed</p>
+    </div>
+
+    <select id="cameraSelect" aria-label="Select camera">
+      <option>CAM-01</option>
+      <option>CAM-02</option>
+      <option>CAM-03</option>
+      <option>CAM-04</option>
+    </select>
+  </div>
+
+  <!-- ANPR MAIN DASHBOARD -->
+  <div class="anpr-dashboard">
+
+    <!-- LEFT: CAMERA FEED -->
+    <div class="panel anpr-live-panel">
+
+      <div class="anpr-panel-top">
+        <div class="anpr-live-heading">
+          <span class="anpr-live-dot"></span>
+
+          <div>
+            <h3>DEMO FEED · CAM-01</h3>
+            <small id="feedCam">CAM-01 · City Corridor</small>
+          </div>
+        </div>
+
+        <button class="anpr-location-btn" onclick="showPage('overview')">◉ City network</button>
+      </div>
+
+      <div class="anpr-camera">
+
+        <div class="anpr-road">
+
+          <div class="road-line road-line-1"></div>
+          <div class="road-line road-line-2"></div>
+          <div class="road-line road-line-3"></div>
+
+          <div class="road-divider"></div>
+
+          <!-- VEHICLES -->
+          <div class="mock-car car-1"></div>
+          <div class="mock-car car-2"></div>
+          <div class="mock-car car-3"></div>
+
+          <!-- DETECTION BOX 1 -->
+          <div class="plate-box plate-box-1">
+
+            <div class="plate-info">
+              <b>PLATE ID: DL 8C AB 1234</b>
+
+              <span>
+                CONFIDENCE:
+                <strong>96%</strong>
+                (MATCH) ✓
+              </span>
+            </div>
+
+            <span class="box-corner top-left"></span>
+            <span class="box-corner top-right"></span>
+            <span class="box-corner bottom-left"></span>
+            <span class="box-corner bottom-right"></span>
+
+          </div>
+
+          <!-- DETECTION BOX 2 -->
+          <div class="plate-box plate-box-2">
+
+            <div class="plate-info">
+              <b>PLATE ID: UP 16 CK 4582</b>
+
+              <span>
+                CONFIDENCE:
+                <strong>92%</strong>
+                (MATCH) ✓
+              </span>
+            </div>
+
+            <span class="box-corner top-left"></span>
+            <span class="box-corner top-right"></span>
+            <span class="box-corner bottom-left"></span>
+            <span class="box-corner bottom-right"></span>
+
+          </div>
+
+          <!-- DETECTION BOX 3 -->
+          <div class="plate-box plate-box-3">
+
+            <div class="plate-info">
+              <b>PLATE ID: DL 3C BK 9211</b>
+
+              <span>
+                CONFIDENCE:
+                <strong>89%</strong>
+              </span>
+            </div>
+
+            <span class="box-corner top-left"></span>
+            <span class="box-corner top-right"></span>
+            <span class="box-corner bottom-left"></span>
+            <span class="box-corner bottom-right"></span>
+
+          </div>
+
+        </div>
+
+        <!-- CAMERA INFO -->
+        <div class="anpr-camera-info">
+          <span>INFERENCE: <b>14ms</b></span>
+          <span>FPS: <b>30</b></span>
+          <span>MODE: <b>DEMO</b></span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- MIDDLE COLUMN -->
+    <div class="anpr-middle">
+
+      <!-- STATISTICS -->
+      <div class="panel anpr-stats">
+
+        <div>
+          <span>ACTIVE CAMERAS</span>
+          <strong>1</strong>
+        </div>
+
+        <div>
+          <span>SCANS TODAY</span>
+          <strong>14,302</strong>
+        </div>
+
+        <div>
+          <span>SYSTEM LATENCY</span>
+          <strong>12ms</strong>
+        </div>
+
+        <div>
+          <span>BLACKLIST MATCHES</span>
+          <strong>3</strong>
+        </div>
+
+      </div>
+
+
+      <!-- LATEST DETECTIONS -->
+      <div class="panel latest-detections">
+
+        <div class="anpr-section-header">
+
+          <h3>LATEST DETECTIONS</h3>
+
+          <button onclick="exportLog()">⇩ Export Log</button>
+
+        </div>
+
+
+        <div class="anpr-search">
+          <span>⌕</span>
+
+          <input
+            type="text"
+            id="detectionFilter" aria-label="Filter detections" placeholder="Filter plate, time, confidence"
+          >
+
+        </div>
+
+
+        <div class="detection-header">
+          <span>TIMESTAMP</span>
+          <span>LICENSE PLATE</span>
+          <span>VEHICLE</span>
+          <span>CONFIDENCE</span>
+        </div>
+
+
+        <div class="detection-item">
+          <span>10:42:18</span>
+          <span>DL 8C AB 1234</span>
+          <span>🚗</span>
+          <span class="confidence">━ 96%</span>
+        </div>
+
+        <div class="detection-item">
+          <span>10:42:11</span>
+          <span>HR 26 DK 9021</span>
+          <span>🚙</span>
+          <span class="confidence">━ 92%</span>
+        </div>
+
+        <div class="detection-item">
+          <span>10:41:58</span>
+          <span>UP 16 CK 4582</span>
+          <span>🚗</span>
+          <span class="confidence">━ 92%</span>
+        </div>
+
+        <div class="detection-item">
+          <span>10:41:42</span>
+          <span>DL 3C BK 9211</span>
+          <span>🚙</span>
+          <span class="confidence">━ 89%</span>
+        </div>
+
+        <div class="detection-item">
+          <span>10:41:18</span>
+          <span>DL 8C AB 1234</span>
+          <span>🚗</span>
+          <span class="confidence">━ 96%</span>
+        </div>
+
+        <div class="detection-item">
+          <span>10:40:58</span>
+          <span>UP 18 CK 4582</span>
+          <span>🚙</span>
+          <span class="confidence">━ 91%</span>
+        </div>
+
+        <div class="detection-item">
+          <span>10:40:42</span>
+          <span>DL 3C BK 9211</span>
+          <span>🚗</span>
+          <span class="confidence">━ 89%</span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- RIGHT COLUMN -->
+    <div class="anpr-right">
+
+
+      <!-- LIVE PLATE READS -->
+      <div class="panel live-plate-reads">
+
+        <div class="anpr-section-header">
+
+          <div>
+            <h3>LIVE PLATE READS</h3>
+            <small>SYSTEM LOG · RECENT PLATES</small>
+          </div>
+
+        </div>
+
+
+        <div class="live-actions">
+          <button onclick="exportLog()">⇩ Export Log</button>
+          <button onclick="showPage('overview')">▣ View Map</button>
+          <button aria-label="Demo feed information" onclick="openModal('Demo feed','These plate reads and camera statistics are predefined presentation data.')">⚙</button>
+        </div>
+
+
+        <div class="live-header">
+          <span>TIMESTAMP</span>
+          <span>LICENSE PLATE</span>
+          <span>CONFIDENCE</span>
+        </div>
+
+
+        <div class="live-item">
+          <span>10:42:18</span>
+          <span>DL 8C AB 1234</span>
+          <span>🚗 <b>96%</b></span>
+        </div>
+
+        <div class="live-item">
+          <span>10:42:11</span>
+          <span>HR 26 DK 9021</span>
+          <span>🚙 <b>92%</b></span>
+        </div>
+
+        <div class="live-item">
+          <span>10:41:58</span>
+          <span>UP 16 CK 4582</span>
+          <span>🚗 <b>92%</b></span>
+        </div>
+
+        <div class="live-item">
+          <span>10:41:42</span>
+          <span>DL 3C BK 9211</span>
+          <span>🚙 <b>89%</b></span>
+        </div>
+
+        <div class="live-item">
+          <span>10:41:18</span>
+          <span>DL 8C AB 1234</span>
+          <span>🚗 <b>96%</b></span>
+        </div>
+
+        <div class="live-item">
+          <span>10:40:58</span>
+          <span>UP 18 CK 4582</span>
+          <span>🚙 <b>91%</b></span>
+        </div>
+
+      </div>
+
+
+      <!-- ALERTS -->
+      <div class="panel anpr-alerts">
+
+        <h3>ALERTS</h3>
+
+        <div class="blacklist-alert">
+          <span>‼</span>
+
+          <div>
+            <b>DL 3C BK 9211 [BLACKLIST MATCH]</b>
+            <small>Detected at 10:41:42</small>
+          </div>
+        </div>
+
+
+        <div class="blacklist-alert">
+          <span>‼</span>
+
+          <div>
+            <b>HR 26 DK 9021 [BLACKLIST MATCH]</b>
+            <small>Detected at 10:42:11</small>
+          </div>
+        </div>
+
+
+        <div class="blacklist-alert">
+          <span>‼</span>
+
+          <div>
+            <b>DL 3C BK 9211 [BLACKLIST MATCH]</b>
+            <small>Detected at 10:40:42</small>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+   <section id="tracking" class="page">
+
+  <div class="tracking-header">
+
+    <div>
+      <h2>Vehicle Tracking</h2>
+      <p>Cross-camera route demonstration</p>
+    </div>
+
+    <div class="tracking-actions">
+
+      <div class="tracking-search">
+        <input
+          id="vehicleSearch" aria-label="Vehicle registration number"
+          type="text"
+          placeholder="Search vehicle registration number"
+          value="DL 8C AB 1234"
+        >
+        <button onclick="searchVehicle()">Search</button>
+      </div>
+
+      <button
+        class="track-new-btn"
+        onclick="openModal('Track New Vehicle','This demo includes DL 8C AB 1234. Use the search field to inspect its four predefined camera sightings.')"
+      >
+        <span>＋</span> Track New Vehicle
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div id="vehicleResult">
+
+    <div class="vehicle-card panel">
+
+      <div class="vehicle-id">
+
+        <span class="vehicle-symbol">SEDAN</span>
+
+        <div>
+          <small>Registration</small>
+          <h2>DL 8C AB 1234</h2>
+        </div>
+
+      </div>
+
+      <span class="badge clear vehicle-active">Active</span>
+
+      <div class="vehicle-meta">
+
+        <div>
+          <small>Vehicle Type</small>
+          <b>Sedan</b>
+        </div>
+
+        <div>
+          <small>First Detected</small>
+          <b>10:22 AM</b>
+        </div>
+
+        <div>
+          <small>Last Detected</small>
+          <b>10:46 AM</b>
+        </div>
+
+        <div>
+          <small>Sightings</small>
+          <b>4</b>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="tracking-stats">
+
+      <div class="tracking-stat-card sightings-card">
+        <div class="tracking-stat-icon">▣</div>
+        <div>
+          <span>Total Sightings</span>
+          <strong>4</strong>
+          <small>Across 4 cameras</small>
+        </div>
+      </div>
+
+      <div class="tracking-stat-card distance-card">
+        <div class="tracking-stat-icon">▥</div>
+        <div>
+          <span>Total Distance</span>
+          <strong>2.8 km</strong>
+          <small>Approx. travel</small>
+        </div>
+      </div>
+
+      <div class="tracking-stat-card speed-card">
+        <div class="tracking-stat-icon">⌁</div>
+        <div>
+          <span>Avg. Speed</span>
+          <strong>32 km/h</strong>
+          <small>Average speed</small>
+        </div>
+      </div>
+
+      <div class="tracking-stat-card duration-card">
+        <div class="tracking-stat-icon">◷</div>
+        <div>
+          <span>Tracking Duration</span>
+          <strong>24m</strong>
+          <small>Total time tracked</small>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="tracking-grid">
+
+      <div class="panel route-panel">
+
+        <div class="panel-head route-panel-head">
+
+          <div>
+            <h2>Vehicle Route</h2>
+            <p>Camera-to-camera movement · Interactive route map</p>
+          </div>
+
+          <div class="route-controls">
+
+            <button
+              class="route-view-btn active"
+              id="mapViewBtn"
+            >
+              ◉ &nbsp; Map View
+            </button>
+
+            <button
+              class="route-view-btn"
+              id="timelineViewBtn"
+            >
+              ⊞ &nbsp; Timeline View
+            </button>
+
+            <button
+              class="route-expand-btn" aria-label="Expand route map"
+              onclick="toggleExpandedMap()"
+            >
+              ⛶
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="route-map">
+
+          <div class="map-road road-a"></div>
+          <div class="map-road road-b"></div>
+          <div class="map-road road-c"></div>
+          <div class="map-road road-d"></div>
+          <div class="map-road road-e"></div>
+          <div class="map-road road-f"></div>
+          <div class="map-road road-g"></div>
+
+          <svg
+    class="vehicle-route-line"
+    viewBox="0 0 100 100"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+>
+    <!-- CAM-02 → CAM-05 -->
+    <line
+        class="route-line route-line-cyan"
+        x1="18"
+        y1="39"
+        x2="43"
+        y2="72"
+    />
+
+    <!-- CAM-05 → CAM-08 -->
+    <line
+        class="route-line route-line-blue"
+        x1="43"
+        y1="72"
+        x2="61"
+        y2="26"
+    />
+
+    <!-- CAM-08 → CAM-11 -->
+    <line
+        class="route-line route-line-purple"
+        x1="61"
+        y1="26"
+        x2="81"
+        y2="67"
+    />
+</svg>
+
+
+          <div class="route-location location-1">
+
+            <div class="location-label">
+              <b>CAM-02</b>
+              <span>10:22 AM</span>
+            </div>
+
+            <div class="location-dot detected"></div>
+
+          </div>
+
+
+          <div class="route-location location-2">
+
+            <div class="location-label">
+              <b>CAM-05</b>
+              <span>10:31 AM</span>
+            </div>
+
+            <div class="location-dot detected"></div>
+
+          </div>
+
+
+          <div class="route-location location-3">
+
+            <div class="location-label">
+              <b>CAM-08</b>
+              <span>10:39 AM</span>
+            </div>
+
+            <div class="location-dot current"></div>
+
+          </div>
+
+
+          <div class="route-location location-4">
+
+            <div class="location-label">
+              <b>CAM-11</b>
+              <span>10:46 AM</span>
+            </div>
+
+            <div class="location-dot current"></div>
+
+          </div>
+
+
+          <div class="map-controls">
+
+            <button aria-label="Zoom in" onclick="zoomRoute(1)">+</button>
+            <button aria-label="Zoom out" onclick="zoomRoute(-1)">−</button>
+
+            <button
+              class="map-location-btn"
+              aria-label="Reset map zoom" onclick="resetRouteMap()"
+            >
+              ◎
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="route-legend">
+
+          <span>
+            <i class="legend-route"></i>
+            Route Path
+          </span>
+
+          <span>
+            <i class="legend-detected"></i>
+            Detected Point
+          </span>
+
+          <span>
+            <i class="legend-current"></i>
+            Current Location
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="panel sightings-panel">
+
+        <div class="panel-head">
+
+          <div>
+            <h2>Recent Sightings</h2>
+            <p>Latest route checkpoints</p>
+          </div>
+
+        </div>
+
+
+        <div class="timeline">
+
+          <div class="timeline-item last">
+
+            <i></i>
+
+            <div class="timeline-content">
+
+              <div class="timeline-title">
+                <b>CAM-11</b>
+                <span class="timeline-time">10:46 AM</span>
+                <em>Last detected</em>
+              </div>
+
+              <span class="timeline-location">
+                Sector 18
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="timeline-item corridor">
+
+            <i></i>
+
+            <div class="timeline-content">
+
+              <div class="timeline-title">
+                <b>CAM-08</b>
+                <span class="timeline-time">10:39 AM</span>
+                <em>Main corridor</em>
+              </div>
+
+              <span class="timeline-location">
+                MG Road
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="timeline-item sector">
+
+            <i></i>
+
+            <div class="timeline-content">
+
+              <div class="timeline-title">
+                <b>CAM-05</b>
+                <span class="timeline-time">10:31 AM</span>
+                <em>Sector 15</em>
+              </div>
+
+              <span class="timeline-location">
+                Central Avenue
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="timeline-item entry">
+
+            <i></i>
+
+            <div class="timeline-content">
+
+              <div class="timeline-title">
+                <b>CAM-02</b>
+                <span class="timeline-time">10:22 AM</span>
+                <em>Entry road</em>
+              </div>
+
+              <span class="timeline-location">
+                NH-48 Entry
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="full-timeline-btn"
+          onclick="setRouteView('timeline')"
+        >
+          View Full Timeline
+          <span>›</span>
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+    <section id="analytics" class="page">
+  <div class="page-toolbar">
+    <div>
+      <h2>Traffic Analytics</h2>
+      <p>Compact city traffic indicators · static demo data</p>
+    </div>
+  </div>
+
+  <div class="stats-grid analytics-stats">
+    <div class="stat-card">
+      <span>Total Vehicles</span>
+      <strong>12,486</strong>
+    </div>
+
+    <div class="stat-card">
+      <span>Average Traffic Density</span>
+      <strong>68%</strong>
+    </div>
+
+    <div class="stat-card">
+      <span>Peak Traffic Hour</span>
+      <strong class="small-value">6:00–7:00 PM</strong>
+    </div>
+
+    <div class="stat-card">
+      <span>Congested Junctions</span>
+      <strong class="warning-text">3</strong>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    <div class="panel chart-card">
+      <div class="panel-head">
+        <div>
+          <h2>Vehicle Count by Hour</h2>
+          <p>06:00–23:00 · Relative volume index (0–100)</p>
+        </div>
+      </div>
+      <div class="bar-chart" id="hourChart" role="img" aria-label="Hourly demo traffic volume index from 06:00 to 23:00"></div><div class="chart-axis"><span>06:00</span><span>12:00</span><span>18:00</span><span>23:00</span></div>
+    </div>
+
+    <div class="panel chart-card">
+      <div class="panel-head">
+        <div>
+          <h2>Vehicle Type Distribution</h2>
+          <p>Current-day composition</p>
+        </div>
+      </div>
+
+      <div class="donut-wrap">
+        <div class="donut" role="img" aria-label="Cars 42%, bikes 31%, buses 8%, trucks 11%, autos 8%"></div>
+
+        <div class="chart-legend">
+          <p><i></i> Car <b>42%</b></p>
+          <p><i></i> Bike <b>31%</b></p>
+          <p><i></i> Bus <b>8%</b></p>
+          <p><i></i> Truck <b>11%</b></p>
+          <p><i></i> Auto <b>8%</b></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel chart-card">
+      <div class="panel-head">
+        <div>
+          <h2>Traffic Density by Junction</h2>
+          <p>Current status</p>
+        </div>
+      </div>
+
+      <div class="density-list">
+        <p><span>Junction A</span><b>72%</b></p>
+        <div><i style="width:72%"></i></div>
+
+        <p><span>Junction B</span><b>89%</b></p>
+        <div><i style="width:89%"></i></div>
+
+        <p><span>Junction C</span><b>54%</b></p>
+        <div><i style="width:54%"></i></div>
+
+        <p><span>Junction D</span><b>63%</b></p>
+        <div><i style="width:63%"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <section id="alerts" class="page">
+      <div class="page-toolbar"><div><h2>Alert Centre</h2><p>Review and resolve the three featured demo incidents</p></div><div class="tabs"><button class="tab active" data-filter="all">All</button><button class="tab" data-filter="critical">Critical Alerts</button><button class="tab" data-filter="warning">Warnings</button><button class="tab" data-filter="resolved">Resolved</button></div></div>
+      <div class="alerts-grid" id="alertsGrid">
+        <article class="panel alert-card" data-type="warning"><div class="alert-card-head"><span class="big-alert warning">P</span><div><small>10:35 AM · CAM-09</small><h2>Restricted Parking Violation</h2></div><span class="badge warning">Medium</span></div><div class="alert-details"><p><span>Vehicle</span>DL 3C BK 9211</p><p><span>Location</span>Sector 18 Entry Road</p><p><span>Camera</span>CAM-09</p></div><div class="alert-actions"><button class="secondary-btn" onclick="openModal('Alert Details','Restricted parking violation · DL 3C BK 9211 · Sector 18 Entry Road · CAM-09 · 10:35 AM')">View Details</button><button class="primary-btn resolve-btn" onclick="resolveAlert(this)">Mark Resolved</button></div></article>
+        <article class="panel alert-card" data-type="critical"><div class="alert-card-head"><span class="big-alert critical">!</span><div><small>10:42 AM · CAM-04</small><h2>Blacklisted Vehicle Detected</h2></div><span class="badge danger">Critical</span></div><div class="alert-details"><p><span>Plate</span>HR 26 DK 9021</p><p><span>Location</span>Main Junction</p><p><span>Camera</span>CAM-04</p></div><div class="alert-actions"><button class="secondary-btn" onclick="openModal('Alert Details','Blacklisted vehicle · HR 26 DK 9021 · Main Junction · CAM-04 · 10:42 AM')">View Details</button><button class="primary-btn resolve-btn" onclick="resolveAlert(this)">Mark Resolved</button></div></article>
+        <article class="panel alert-card" data-type="critical"><div class="alert-card-head"><span class="big-alert critical">!</span><div><small>10:39 AM · CAM-12</small><h2>Possible Accident Detected</h2></div><span class="badge danger">Critical</span></div><div class="alert-details"><p><span>Location</span>Junction B</p><p><span>Camera</span>CAM-12</p><p><span>Time</span>10:39 AM</p></div><div class="alert-actions"><button class="secondary-btn" onclick="openModal('Alert Details','Possible accident · Junction B · CAM-12 · 10:39 AM')">View Details</button><button class="primary-btn resolve-btn" onclick="resolveAlert(this)">Mark Resolved</button></div></article>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="modal"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalText"><button class="modal-close" aria-label="Close dialog" onclick="closeModal()">×</button><h2 id="modalTitle"></h2><p id="modalText"></p><button class="primary-btn" onclick="closeModal()">Close</button></div></div>
+  <script src="js/app.js"></script>
+</body>
+</html>

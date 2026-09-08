@@ -1,0 +1,32 @@
+manifest: data/ocr_benchmark/development_video/manifest.csv
+crops_dir: data/ocr_benchmark/development_video/crops
+output_dir: runs/ocr_benchmark
+
+normalization:
+  # Uppercase, then remove only these separators. No character substitutions.
+  separators: " -_.:/\\\t\r\n"
+
+recognition:
+  allowlist: ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
+
+easyocr:
+  languages: [en]
+  gpu: true
+  output: easyocr_results.csv
+
+paddleocr:
+  language: en
+  device: cpu
+  output: paddleocr_results.csv
+
+awiros:
+  source_dir: external/awiros_anpr_ocr
+  weights: external/awiros_anpr_ocr/model.safetensors
+  dictionary: external/awiros_anpr_ocr/en_dict.txt
+  paddleocr_dir: external/awiros_anpr_ocr/PaddleOCR
+  device: gpu
+  output: awiros_results.csv
+
+evaluation:
+  comparison: comparison.csv
+  report: report.md

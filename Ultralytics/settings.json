@@ -1,0 +1,19 @@
+{
+  "settings_version": "0.0.8",
+  "datasets_dir": "B:\\ETRIS ultimate AI\\datasets",
+  "weights_dir": "weights",
+  "runs_dir": "runs",
+  "uuid": "72dd35ce7b409b9682710a6797a51eb9f47d6802a7a58dedb4f5890a6b0d9354",
+  "sync": true,
+  "api_key": "",
+  "openai_api_key": "",
+  "clearml": true,
+  "comet": true,
+  "dvc": true,
+  "mlflow": true,
+  "raytune": true,
+  "tensorboard": false,
+  "wandb": false,
+  "vscode_msg": true,
+  "openvino_msg": true
+}

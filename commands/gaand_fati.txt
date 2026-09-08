@@ -1,0 +1,8 @@
+.\.venv\Scripts\python.exe -c "import cv2; p=r'test_videos\evaluator_anpr.mp4'; c=cv2.VideoCapture(p); print('Opened:',c.isOpened()); print('Resolution:',int(c.get(cv2.CAP_PROP_FRAME_WIDTH)),'x',int(c.get(cv2.CAP_PROP_FRAME_HEIGHT))); print('FPS:',c.get(cv2.CAP_PROP_FPS)); print('Frames:',int(c.get(cv2.CAP_PROP_FRAME_COUNT))); c.release()"
+
+$env:YOLO_CONFIG_DIR=(Resolve-Path ".ultralytics-config").Path
+
+$env:PYTHONPATH=(Get-Location).Path
+
+#setup yolo
+$env:YOLO_CONFIG_DIR=(Resolve-Path ".ultralytics-config").Path

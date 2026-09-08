@@ -1,0 +1,26 @@
+project:
+  name: "ETRIS Ultimate AI"
+  version: "0.1.0"
+  environment: "development"
+
+runtime:
+  device: "cuda"
+  workers: 1
+
+logging:
+  level: "INFO"
+
+evidence:
+  retain_raw_frames: true
+  retain_plate_crops: true
+  retain_ocr_results: true
+
+tracking:
+  max_age: 30
+  min_hits: 3
+
+analytics:
+  enabled: true
+
+alerts:
+  enabled: true

@@ -1,0 +1,110 @@
+const pages = ["overview","anpr","tracking","analytics","signal","alerts"];
+const titles = {overview:"Overview",anpr:"Live ANPR",tracking:"Vehicle Tracking",analytics:"Traffic Analytics",signal:"Signal Control",alerts:"Alert Centre"};
+
+document.querySelectorAll(".nav-item").forEach(btn=>btn.addEventListener("click",()=>showPage(btn.dataset.page)));
+function showPage(page){
+  if(!pages.includes(page)) return;
+  document.querySelector(".route-panel")?.classList.remove("expanded");
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(page)?.classList.add("active");
+  document.querySelectorAll(".nav-item").forEach(b=>{
+    b.classList.toggle("active",b.dataset.page===page);
+    if(b.dataset.page===page) b.setAttribute("aria-current","page"); else b.removeAttribute("aria-current");
+  });
+  const title=document.getElementById("pageTitle"); if(title) title.textContent=titles[page];
+  if(page==="analytics") buildChart();
+}
+
+let modalReturnFocus=null;
+function openModal(title,text){
+  modalReturnFocus=document.activeElement;
+  document.getElementById("modalTitle").textContent=title;
+  document.getElementById("modalText").textContent=text;
+  document.getElementById("modal").classList.add("open");
+  document.querySelector(".modal-close")?.focus();
+}
+function closeModal(){document.getElementById("modal").classList.remove("open"); modalReturnFocus?.focus();}
+
+const alertsEmpty=document.createElement("p");
+alertsEmpty.className="empty-state";alertsEmpty.setAttribute("role","status");alertsEmpty.textContent="No incidents in this view.";
+document.getElementById("alertsGrid")?.after(alertsEmpty);
+function applyAlertFilter(){
+  const active=document.querySelector(".tab.active"); if(!active) return;
+  const filter=active.dataset.filter; let visible=0;
+  document.querySelectorAll(".alert-card").forEach(card=>{card.hidden=filter!=="all" && card.dataset.type!==filter;if(!card.hidden)visible++;});
+  alertsEmpty.hidden=visible>0;
+}
+document.querySelectorAll(".tab").forEach(tab=>{
+  tab.setAttribute("aria-pressed",String(tab.classList.contains("active")));
+  tab.addEventListener("click",()=>{
+    document.querySelectorAll(".tab").forEach(t=>{t.classList.toggle("active",t===tab);t.setAttribute("aria-pressed",String(t===tab));});
+    applyAlertFilter();
+  });
+});
+applyAlertFilter();
+
+function buildChart(){
+  const chart=document.getElementById("hourChart");
+  if(chart && !chart.children.length) chart.innerHTML='<p class="empty-state">Waiting for analytics backend…</p>';
+}
+buildChart();
+
+document.querySelector('.nav-item.active')?.setAttribute('aria-current','page');
+document.getElementById('vehicleSearch')?.addEventListener('keydown',e=>{if(e.key==='Enter')searchVehicle();});
+document.getElementById('modal')?.addEventListener('click',e=>{if(e.target.id==='modal')closeModal();});
+document.addEventListener('keydown',e=>{
+  const modal=document.getElementById('modal');
+  if(e.key==='Escape'){
+    if(modal?.classList.contains('open')) closeModal();
+    else document.querySelector('.route-panel')?.classList.remove('expanded');
+  }
+  if(e.key==='Tab' && modal?.classList.contains('open')){
+    const controls=modal.querySelectorAll('button'); const first=controls[0],last=controls[controls.length-1];
+    if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus();}
+    else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();}
+  }
+});
+
+document.getElementById('detectionFilter')?.addEventListener('input',e=>{
+  const query=e.target.value.trim().toLowerCase();let visible=0;
+  document.querySelectorAll('#anprDetectionRows .detection-item').forEach(row=>{row.hidden=!row.textContent.toLowerCase().includes(query);if(!row.hidden)visible++;});
+  let empty=document.getElementById('detectionFilterEmpty');
+  if(!empty){empty=document.createElement('p');empty.id='detectionFilterEmpty';empty.className='empty-state';document.getElementById('anprDetectionRows')?.after(empty);}
+  empty.textContent='No matching backend detections.';empty.hidden=visible>0 || !query;
+});
+function exportLog(){
+  const rows=[['Timestamp','License plate','Vehicle','Confidence']];
+  document.querySelectorAll('#anprDetectionRows .detection-item').forEach(row=>rows.push(Array.from(row.children,cell=>cell.textContent.trim())));
+  if(rows.length===1){openModal('Nothing to export','No ANPR detections have been returned by the backend yet.');return;}
+  const csv=rows.map(row=>row.map(cell=>'"'+cell.replace(/"/g,'""')+'"').join(',')).join('\r\n');
+  const url=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));
+  const link=document.createElement('a');link.href=url;link.download='ETRIS-anpr-detections.csv';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+const routeMap=document.querySelector('.route-map');
+let routeCanvas=null;
+if(routeMap){
+  routeCanvas=document.createElement('div');routeCanvas.className='route-canvas';
+  Array.from(routeMap.children).filter(node=>!node.classList.contains('map-controls')).forEach(node=>routeCanvas.append(node));
+  routeMap.prepend(routeCanvas);
+}
+let routeZoom=1;
+function zoomRoute(direction){routeZoom=Math.max(1,Math.min(1.8,routeZoom+direction*.2));if(routeCanvas)routeCanvas.style.transform=`scale(${routeZoom})`;}
+function resetRouteMap(){routeZoom=1;if(routeCanvas)routeCanvas.style.transform='scale(1)';}
+const routeTimeline=document.createElement('div');routeTimeline.className='route-timeline';routeTimeline.hidden=true;routeMap?.after(routeTimeline);
+function syncRouteTimeline(){const source=document.getElementById('trackingTimeline');if(source){routeTimeline.innerHTML='';routeTimeline.append(source.cloneNode(true));}}
+function setRouteView(view){
+  const isMap=view==='map';if(routeMap)routeMap.hidden=!isMap;routeTimeline.hidden=isMap;
+  const legend=document.querySelector('.route-legend');if(legend)legend.hidden=!isMap;
+  ['map','timeline'].forEach(name=>{const btn=document.getElementById(name+'ViewBtn');if(btn){btn.classList.toggle('active',name===view);btn.setAttribute('aria-pressed',String(name===view));}});
+  if(!isMap){syncRouteTimeline();document.getElementById('timelineViewBtn')?.focus();}
+}
+document.getElementById('mapViewBtn')?.addEventListener('click',()=>setRouteView('map'));
+document.getElementById('timelineViewBtn')?.addEventListener('click',()=>setRouteView('timeline'));
+function toggleExpandedMap(){document.querySelector('.route-panel')?.classList.toggle('expanded');}
+setRouteView('map');
+
+function searchVehicle(){
+  if(typeof window.ETRIS_searchVehicle==='function') return window.ETRIS_searchVehicle();
+  openModal('Backend not ready','Vehicle search adapter has not initialized yet.');
+}

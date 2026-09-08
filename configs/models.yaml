@@ -1,0 +1,100 @@
+vehicle_detection:
+  enabled: true
+  model: "yolo26n"
+  version: "yolo26n"
+  weights: "weights/yolo26n.pt"
+  confidence_threshold: 0.25
+  input_size: 640
+  device: "cuda"
+
+plate_detection:
+  enabled: true
+  model: "yolo11n-indian"
+  version: null
+  weights: "weights/yolo11n-indian-plate.pt"
+  confidence_threshold: 0.25
+  input_size: null
+  device: "cuda"
+
+tracking:
+  enabled: true
+  algorithm: simple_iou
+  version: "1.0"
+  device: "cpu"
+
+ocr:
+  enabled: true
+  primary_engine: svtrv2_s
+  svtrv2_s:
+    enabled: true
+    openocr_root: "external/OpenOCR"
+    config_path: "external/OpenOCR/weights/svtrv2_s/drive-download-20260904T165653Z-1-001/config_infer.yml"
+    checkpoint_path: "external/OpenOCR/weights/svtrv2_s/drive-download-20260904T165653Z-1-001/best.pth"
+    device: "auto"
+
+evidence_fusion:
+  enabled: true
+  strategy: "multi_frame"
+  minimum_observations: null
+  minimum_consensus: null
+
+ocr_fusion:
+  enabled: true
+  max_evidence_per_track: 12
+  min_unique_frames_for_accept: 2
+  max_cluster_edit_distance: 2
+  max_cluster_normalized_edit_distance: 0.20
+  min_cluster_weight_share: 0.70
+  min_mean_position_confidence: 0.80
+  min_position_confidence: 0.65
+  min_character_support_frames: 2
+  min_final_confidence: 0.82
+  weight_ocr_confidence: 0.60
+  weight_plate_quality: 0.40
+  confidence_weight_cluster_share: 0.40
+  confidence_weight_position: 0.40
+  confidence_weight_evidence: 0.20
+  separators: " -_.:/\\\t\r\n"
+  engine_policies:
+    awiros_anpr_ocr:
+      eligible_for_independent_accept: false
+
+ocr_india_constraints:
+  enabled: true
+  beam_width: 16
+  max_character_changes: 2
+  min_changed_character_support_frames: 2
+  min_changed_character_support: 0.20
+  invalid_standard_prefix_penalty: 0.35
+  current_prefix_bonus: 0.10
+  legacy_prefix_bonus: 0.04
+  bh_format_bonus: 0.10
+  min_constraint_score_margin: 0.04
+
+quality_assessment:
+  enabled: true
+  top_k: 3
+  min_frame_gap: 2
+  min_plate_width_px: 80
+  fallback_min_plate_width_px: 70
+  min_plate_height_px: 8
+  sharpness_target: 150.0
+  exposure_target: 128.0
+  exposure_tolerance: 128.0
+  contrast_target: 64.0
+  preferred_plate_width_px: 160
+  preferred_plate_height_px: 48
+  min_visible_fraction: 0.75
+  weights:
+    sharpness: 0.35
+    exposure: 0.15
+    contrast: 0.15
+    size: 0.20
+    detector_confidence: 0.15
+
+live_performance:
+  plate_detector_max_batch_size: 4
+  vehicle_detection_interval: 2
+  preview_async: true
+  enable_fp16: false
+  plate_detection_intervals: [2, 3, 4, 8]

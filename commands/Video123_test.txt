@@ -1,0 +1,5 @@
+Start-Process "B:\ETRIS ultimate AI\runs\traffic_1_full\traffic_signal_annotated.mp4"
+
+Start-Process "B:\ETRIS ultimate AI\runs\traffic_2_full\traffic_signal_annotated.mp4"
+
+Start-Process "B:\ETRIS ultimate AI\runs\traffic_3_full\traffic_signal_annotated.mp4"

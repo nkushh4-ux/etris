@@ -1,0 +1,40 @@
+{
+  "camera_id": "SIGNAL-DEMO-CAMERA",
+  "restricted_surface": {
+    "mode": "SEMANTIC",
+    "semantic": {
+      "enabled": true,
+      "provider": "huggingface_segformer",
+      "model_path": "weights/segmentation/segformer-b0-cityscapes",
+      "input_size": [512, 512],
+      "restricted_classes": ["SIDEWALK"],
+      "minimum_surface_confidence": 0.55,
+      "refresh_interval_s": 5.0,
+      "stabilization_frames": 3
+    },
+    "geometry": {
+      "ground_contact_fraction": 0.25,
+      "minimum_restricted_overlap": 0.40
+    }
+  },
+  "settings": {
+    "stationary_motion_threshold": 0.006,
+    "stationary_min_seconds": 2.0,
+    "violation_min_seconds": 5.0,
+    "track_grace_seconds": 1.5,
+    "minimum_detection_confidence": 0.35
+  },
+  "restricted_parking_zones": [
+  {
+    "zone_id": "RPZ-01",
+    "label": "SERVICE ROAD NO PARKING",
+    "polygon": [
+      [0.65, 0.28],
+      [0.73, 0.28],
+      [0.78, 0.62],
+      [0.66, 0.62]
+    ],
+    "enabled": true
+  }
+]
+}

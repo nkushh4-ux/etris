@@ -1,0 +1,20 @@
+{
+  "intersection_id": "TRAFFIC-5-CAMERA",
+  "settings": {
+    "arrival_window_s": 30.0,
+    "stationary_motion_threshold": 0.012,
+    "queue_stationary_min_s": 1.25,
+    "controller_update_interval_s": 2.0,
+    "track_expiry_s": 2.0
+  },
+  "approaches": [
+    {
+      "approach_id": "INBOUND_MAIN",
+      "label": "INBOUND MAIN ROAD",
+      "traffic_polygon": [[0.43,0.00],[0.76,0.00],[1.00,1.00],[0.27,1.00]],
+      "queue_polygon": [[0.36,0.38],[0.88,0.38],[1.00,1.00],[0.27,1.00]],
+      "entry_line": [[0.29,0.78],[1.00,0.78]],
+      "entry_direction": [0.0,1.0]
+    }
+  ]
+}

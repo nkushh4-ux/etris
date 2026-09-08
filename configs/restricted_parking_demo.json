@@ -1,0 +1,18 @@
+{
+  "camera_id": "SIGNAL-DEMO-CAMERA",
+  "settings": {
+    "stationary_motion_threshold": 0.006,
+    "stationary_min_seconds": 2.0,
+    "violation_min_seconds": 5.0,
+    "track_grace_seconds": 1.5,
+    "minimum_detection_confidence": 0.35
+  },
+  "restricted_parking_zones": [
+    {
+      "zone_id": "RPZ-01",
+      "label": "NO PARKING ZONE",
+      "polygon": [[0.02, 0.48], [0.16, 0.48], [0.29, 1.0], [0.01, 1.0]],
+      "enabled": true
+    }
+  ]
+}

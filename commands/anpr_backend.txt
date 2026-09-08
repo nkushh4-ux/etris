@@ -1,0 +1,11 @@
+d "B:\ETRIS ultimate AI"
+
+$env:PYTHONPATH=(Get-Location).Path
+$env:DATABASE_URL="postgresql+psycopg://etris:etris@127.0.0.1:5432/etris"
+$env:YOLO_CONFIG_DIR=(Resolve-Path ".ultralytics-config").Path
+$env:ETRIS_ANPR_VIDEO="C:\Users\ANKUSH\Downloads\Untitled design.mp4"
+$env:ETRIS_ANPR_CAMERA_ID="CAM-UNTITLED-DESIGN"
+
+.\.venv-ocr-svtrv2\Scripts\python.exe -m uvicorn backend.api.app:app `
+    --host 127.0.0.1 `
+    --port 8000

@@ -1,0 +1,12 @@
+import {useEffect,useState} from "react";
+import {getRestrictedParkingAlerts,RestrictedParkingAlert} from "./services/alertService";
+
+export default function AlertCentre(){
+  const [alerts,setAlerts]=useState<RestrictedParkingAlert[]>([]);const [error,setError]=useState(false);
+  useEffect(()=>{let active=true;let timer=0;const poll=async()=>{try{const rows=await getRestrictedParkingAlerts();if(active){setAlerts(rows);setError(false)}}catch{if(active)setError(true)}finally{if(active)timer=window.setTimeout(poll,3000)}};void poll();return()=>{active=false;window.clearTimeout(timer)}},[]);
+  return <section className="alertView"><div className="analyticsToolbar"><div><span className="eyebrow">STAGE 12A V2</span><h2>Alert Centre</h2></div><span className={`health ${error?"off":""}`}><i/>{error?"ALERT API OFFLINE":"RESTRICTED PARKING"}</span></div><div className="alertGrid">{alerts.map(alert=>{const state=alert.parking_state||"UNCERTAIN";return <article className={`panel parkingAlert state-${state.toLowerCase()}`} key={alert.alert_id}><div className="panelTitle"><span>RESTRICTED PARKING</span><b>{state.replaceAll("_"," ")}</b></div><dl><Item label="Camera" value={alert.camera_id}/><Item label="Zone" value={alert.zone_id}/><Item label="Vehicle" value={alert.vehicle_class}/><Item label="Track ID" value={alert.track_id==null?null:`#${alert.track_id}`}/><Item label="Stationary" value={seconds(alert.stationary_duration_s)}/><Item label="Restricted overlap" value={percent(alert.restricted_overlap)}/><Item label="Surface" value={alert.surface_class}/><Item label="Surface confidence" value={percent(alert.surface_confidence)}/><Item label="Decision confidence" value={alert.decision_confidence}/><Item label="Timestamp" value={sourceTime(alert.confirmed_at??alert.first_seen_at)}/><Item label="Lifecycle" value={alert.status}/></dl></article>})}{!alerts.length&&!error&&<div className="analyticsState"><strong>No restricted-parking alerts</strong><span>Only confirmed, pipeline-derived violations appear here.</span></div>}</div></section>;
+}
+function Item({label,value}:{label:string;value:unknown}){return <div><dt>{label}</dt><dd>{value==null||value===""?"—":String(value)}</dd></div>}
+function percent(value:number|null|undefined){return value==null?null:`${(value*100).toFixed(1)}%`}
+function seconds(value:number|null|undefined){return value==null?null:`${value.toFixed(1)} s`}
+function sourceTime(value:number|null|undefined){return value==null?null:`Source +${value.toFixed(2)} s`}

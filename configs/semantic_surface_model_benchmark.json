@@ -1,0 +1,21 @@
+{
+  "models": [
+    {
+      "name": "segformer_b0_cityscapes",
+      "enabled": true,
+      "provider": "huggingface_segformer_cityscapes",
+      "model_path": "weights/segmentation/segformer-b0-cityscapes",
+      "input_size": [512, 512]
+    },
+    {
+      "name": "idd_candidate",
+      "enabled": false,
+      "provider": "huggingface_segformer_idd",
+      "model_path": "weights/segmentation/REPLACE_WITH_LICENSED_IDD_CHECKPOINT",
+      "input_size": [512, 512],
+      "road_labels": ["road", "parking", "drivable fallback"],
+      "sidewalk_labels": ["sidewalk", "non-drivable fallback"]
+    }
+  ],
+  "ground_contact_regions": []
+}

@@ -1,0 +1,16 @@
+{
+  "camera_id": "CAM-DEMO-01",
+  "zones": [
+    {
+      "zone_id": "RZ-01",
+      "label": "AUTHORIZED VEHICLES ONLY",
+      "polygon": [[0.65, 0.28], [0.73, 0.28], [0.78, 0.62], [0.66, 0.62]],
+      "enabled": true,
+      "mode": "DENY_BY_DEFAULT",
+      "entry_confirm_seconds": 1.0,
+      "grace_seconds": 1.5,
+      "allowed_vehicle_classes": ["Emergency vehicle"],
+      "allowed_plates": []
+    }
+  ]
+}

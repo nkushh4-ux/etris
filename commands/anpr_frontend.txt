@@ -1,0 +1,3 @@
+cd "B:\ETRIS ultimate AI\frontend"
+
+npm run dev
